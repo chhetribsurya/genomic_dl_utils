@@ -1,4 +1,4 @@
-# Advanced URL Downloader
+# Advanced url download manager
 
 **Author:** Surya B. Chhetri  
 **Version:** 3.0
