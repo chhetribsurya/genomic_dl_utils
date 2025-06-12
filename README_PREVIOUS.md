@@ -16,51 +16,6 @@ A powerful, feature-rich command-line tool for downloading files from URLs with 
 - ✅ **Interactive Help** - Context-sensitive help system
 - ✅ **Error Handling** - Robust retry mechanisms
 - ✅ **Flexible Configuration** - Extensive command-line options
-- ✅ **Smart Color Detection** - Automatic terminal capability detection
-- ✅ **Terminal Compatibility** - Works across different terminal types
-- ✅ **Unicode Support** - Beautiful symbols with ASCII fallback
-
-## 🎨 Terminal Compatibility
-
-The script automatically detects your terminal's capabilities and adapts accordingly:
-
-### **Color Support**
-- **Full Color Terminals** (xterm-256color, modern terminals): Beautiful colored output with Unicode symbols
-- **Basic Terminals** (xterm, older terminals): Colored output with ASCII symbols  
-- **No Color Support** (dumb terminals, pipes): Clean ASCII-only output
-- **Manual Override**: Use `--no-color` to force ASCII-only output
-
-### **Terminal Detection**
-The script checks for:
-- Terminal color capability (`tput colors`)
-- UTF-8 encoding support (for Unicode symbols)
-- Output redirection (automatically disables colors when piped)
-- Terminal type (`$TERM` environment variable)
-
-### **Symbol Fallbacks**
-| Feature | Unicode | ASCII Fallback |
-|---------|---------|----------------|
-| Success | ✓ | [OK] |
-| Failure | ✗ | [FAIL] |
-| Info | ℹ | [INFO] |
-| Arrow | → | --> |
-| Download | ⬇ | [DL] |
-| SLURM | 🖥 | [HPC] |
-
-### **Examples**
-```bash
-# Automatic detection (recommended)
-./download_manager.sh --help
-
-# Force clean output (for scripts)
-./download_manager.sh --help --no-color
-
-# Force UTF-8 if detection fails
-LANG=en_US.UTF-8 ./download_manager.sh --help
-
-# Override terminal type
-TERM=xterm-256color ./download_manager.sh --help
-```
 
 ## 📋 Prerequisites
 
@@ -103,37 +58,9 @@ wget https://raw.githubusercontent.com/yourusername/advanced-url-downloader/main
 chmod +x download_manager.sh
 ```
 
-3. **Test installation:**
-```bash
-# Test with colors (should auto-detect terminal capabilities)
-./download_manager.sh --version
-
-# Test without colors (clean output)
-./download_manager.sh --version --no-color
-```
-
-4. **Optional: Install globally:**
+3. **Optional: Install globally:**
 ```bash
 sudo cp download_manager.sh /usr/local/bin/download_manager
-download_manager --help
-```
-
-### **Terminal Setup (Optional)**
-For optimal experience with colors and Unicode symbols:
-
-```bash
-# Check current terminal capabilities
-echo "Terminal: $TERM"
-tput colors
-locale | grep UTF
-
-# Set UTF-8 encoding (add to ~/.bashrc or ~/.zshrc)
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-
-# For older systems, install modern terminal
-# Ubuntu/Debian: sudo apt-get install gnome-terminal
-# macOS: Install iTerm2 from https://iterm2.com/
 ```
 
 ## 📖 Quick Start
@@ -144,11 +71,8 @@ export LC_ALL=en_US.UTF-8
 echo "https://example.com/file1.zip" > urls.txt
 echo "https://example.com/file2.tar.gz" >> urls.txt
 
-# Download files (with automatic color detection)
+# Download files
 ./download_manager.sh download urls.txt ./downloads
-
-# For automation/scripts (clean output)
-./download_manager.sh download urls.txt ./downloads --no-color --quiet
 ```
 
 ### SLURM Download
@@ -166,15 +90,6 @@ echo "https://example.com/file2.tar.gz" >> urls.txt
 ./download_manager.sh verify ./downloads
 ```
 
-### Check Help (with colors)
-```bash
-# Beautiful colored help (auto-detected)
-./download_manager.sh --help
-
-# Clean help for scripts/documentation
-./download_manager.sh --help --no-color
-```
-
 ## 🎯 Command Reference
 
 ### Main Commands
@@ -187,17 +102,6 @@ echo "https://example.com/file2.tar.gz" >> urls.txt
 | `help` | Show help information |
 | `version` | Show version information |
 
-### Output Modes
-
-The script automatically adapts to your environment, but you can override:
-
-| Mode | When to Use | Example |
-|------|-------------|---------|
-| **Auto-detect** (default) | Interactive terminal use | `./download_manager.sh --help` |
-| **No-color** | Scripts, automation, old terminals | `./download_manager.sh --help --no-color` |
-| **Quiet** | Background jobs, logging | `./download_manager.sh download urls.txt ./downloads --quiet` |
-| **Verbose** | Debugging, detailed monitoring | `./download_manager.sh download urls.txt ./downloads --verbose` |
-
 ### Global Options
 
 | Option | Description |
@@ -206,7 +110,6 @@ The script automatically adapts to your environment, but you can override:
 | `--version, -v` | Show version information |
 | `--verbose` | Enable verbose output |
 | `--quiet` | Suppress non-error output |
-| `--no-color` | Disable colored output and Unicode symbols |
 
 ## 📥 Download Command
 
@@ -247,7 +150,7 @@ The script automatically adapts to your environment, but you can override:
 
 #### Local Downloads
 ```bash
-# Basic download (with auto-detected colors)
+# Basic download
 ./download_manager.sh download urls.txt ./downloads
 
 # High-performance local download
@@ -258,10 +161,7 @@ The script automatically adapts to your environment, but you can override:
     --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
 
 # Download without progress bars (for scripting)
-./download_manager.sh download urls.txt ./downloads --no-progress --quiet --no-color
-
-# Automation-friendly download with clean output
-./download_manager.sh download urls.txt ./downloads --no-color --quiet > download.log 2>&1
+./download_manager.sh download urls.txt ./downloads --no-progress --quiet
 ```
 
 #### SLURM Downloads
@@ -313,7 +213,7 @@ The script automatically adapts to your environment, but you can override:
 ### Examples
 
 ```bash
-# Generate checksums locally (with colors)
+# Generate checksums locally
 ./download_manager.sh verify ./downloads --generate
 
 # Generate checksums with SLURM
@@ -325,7 +225,7 @@ The script automatically adapts to your environment, but you can override:
 # Generate checksums excluding logs
 ./download_manager.sh verify ./downloads --generate --exclude-pattern "*.log"
 
-# Verify existing checksums (with colored output)
+# Verify existing checksums
 ./download_manager.sh verify ./downloads checksums.md5
 
 # Auto-detect and verify checksums
@@ -333,9 +233,6 @@ The script automatically adapts to your environment, but you can override:
 
 # Strict verification (fail fast)
 ./download_manager.sh verify ./downloads --strict
-
-# Automation-friendly verification
-./download_manager.sh verify ./downloads --no-color --quiet
 ```
 
 ## 🖥 SLURM Command
@@ -443,46 +340,21 @@ DOWNLOAD_DIR="./downloads"
 CORES=8
 MEMORY="16G"
 
-# Step 1: Download files (automation-friendly)
+# Step 1: Download files
 echo "Starting downloads..."
 ./download_manager.sh download "$URLS_FILE" "$DOWNLOAD_DIR" \
-    --slurm --cores $CORES --memory $MEMORY --no-color
+    --slurm --cores $CORES --memory $MEMORY
 
 # Step 2: Wait for completion (or check manually)
 echo "Monitor with: ./download_manager.sh slurm status --job-name url-download"
 
 # Step 3: Generate checksums
 echo "Generating checksums..."
-./download_manager.sh verify "$DOWNLOAD_DIR" --generate --slurm --cores $CORES --no-color
+./download_manager.sh verify "$DOWNLOAD_DIR" --generate --slurm --cores $CORES
 
 # Step 4: Verify checksums
 echo "Verifying checksums..."
-./download_manager.sh verify "$DOWNLOAD_DIR" --strict --no-color
-```
-
-### Automation Best Practices
-```bash
-# For scripts and automation, always use:
-# --no-color: Clean output without escape sequences
-# --quiet: Minimal output for logging
-# Proper error handling with exit codes
-
-#!/bin/bash
-set -e  # Exit on any error
-
-# Download with clean output
-if ./download_manager.sh download urls.txt ./downloads --no-color --quiet; then
-    echo "Download completed successfully"
-    
-    # Generate and verify checksums
-    ./download_manager.sh verify ./downloads --generate --no-color --quiet
-    ./download_manager.sh verify ./downloads --no-color --quiet
-    
-    echo "All files verified successfully"
-else
-    echo "Download failed" >&2
-    exit 1
-fi
+./download_manager.sh verify "$DOWNLOAD_DIR" --strict
 ```
 
 ### Error Recovery
@@ -501,29 +373,6 @@ grep "URL:" downloads/.download_logs/errors_*.log | \
 ## 🐛 Troubleshooting
 
 ### Common Issues
-
-#### Color/Display Issues
-```bash
-# If you see escape sequences like \033[0;31m instead of colors:
-
-# 1. Check terminal capabilities
-echo $TERM
-tput colors
-
-# 2. Force no colors
-./download_manager.sh --help --no-color
-
-# 3. Set UTF-8 encoding
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-
-# 4. Test with different terminal
-TERM=xterm-256color ./download_manager.sh --help
-
-# 5. Update terminal or use different one
-# On macOS: Try iTerm2 or upgrade Terminal.app
-# On Linux: Try gnome-terminal, konsole, or xterm
-```
 
 #### Permission Denied
 ```bash
@@ -577,54 +426,6 @@ diff checksums.md5 new_checksums.md5
 
 # SLURM debug information
 ./download_manager.sh download urls.txt ./downloads --slurm --verbose
-
-# Clean output for automation
-./download_manager.sh download urls.txt ./downloads --quiet --no-color
-```
-
-## 🌍 Environment Considerations
-
-### **SSH/Remote Sessions**
-```bash
-# Ensure proper terminal forwarding
-ssh -t user@server
-
-# Set terminal type if needed
-export TERM=xterm-256color
-
-# For automated scripts on remote servers
-./download_manager.sh download urls.txt ./downloads --no-color --quiet
-```
-
-### **Screen/Tmux Sessions**
-```bash
-# In screen/tmux, colors might not work properly
-./download_manager.sh --help --no-color
-
-# Or set proper terminal in screen/tmux config
-# .screenrc: term screen-256color
-# .tmux.conf: set -g default-terminal "screen-256color"
-```
-
-### **CI/CD Pipelines**
-```bash
-# Always use --no-color in automated environments
-./download_manager.sh download urls.txt ./downloads --no-color --quiet
-
-# Example GitHub Actions
-run: |
-  chmod +x download_manager.sh
-  ./download_manager.sh download urls.txt ./downloads --no-color --jobs 4
-```
-
-### **Docker Containers**
-```bash
-# In Dockerfiles, ensure proper locale
-ENV LANG=C.UTF-8
-ENV LC_ALL=C.UTF-8
-
-# Run with no-color for consistent output
-RUN ./download_manager.sh download urls.txt ./downloads --no-color
 ```
 
 ## 📈 Performance Tuning
@@ -681,20 +482,7 @@ RUN ./download_manager.sh download urls.txt ./downloads --no-color
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-### **Common Issues:**
-- **Color/display problems**: Use `--no-color` flag or check [Terminal Compatibility](#-terminal-compatibility)
-- **SLURM errors**: Check cluster status with `./download_manager.sh slurm info`
-- **Download failures**: Review error logs in `target_directory/.download_logs/`
-- **Permission issues**: Ensure script is executable with `chmod +x download_manager.sh`
-
-### **For Automation Issues:**
-Always include the `--no-color` flag in scripts and provide:
-- Full command used
-- Expected vs actual output
-- Environment details (CI/CD, Docker, etc.)
-
----
 
 **Author:** Surya B. Chhetri  
-**Repository:** https://github.com/chhetribsurya/genomic_dl_utils
+**Repository:** https://github.com/chhetribsurya/genomic_dl_utils  
 **Version:** 3.0
