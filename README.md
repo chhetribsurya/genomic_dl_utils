@@ -50,16 +50,16 @@ The script checks for:
 ### **Examples**
 ```bash
 # Automatic detection (recommended)
-./download_manager.sh --help
+./download_manager_v2.sh --help
 
 # Force clean output (for scripts)
-./download_manager.sh --help --no-color
+./download_manager_v2.sh --help --no-color
 
 # Force UTF-8 if detection fails
-LANG=en_US.UTF-8 ./download_manager.sh --help
+LANG=en_US.UTF-8 ./download_manager_v2.sh --help
 
 # Override terminal type
-TERM=xterm-256color ./download_manager.sh --help
+TERM=xterm-256color ./download_manager_v2.sh --help
 ```
 
 ## 📋 Prerequisites
@@ -93,28 +93,28 @@ brew install wget coreutils
 
 1. **Download the script:**
 ```bash
-curl -O https://raw.githubusercontent.com/yourusername/advanced-url-downloader/main/download_manager.sh
+curl -O https://raw.githubusercontent.com/yourusername/advanced-url-downloader/main/download_manager_v2.sh
 # or
-wget https://raw.githubusercontent.com/yourusername/advanced-url-downloader/main/download_manager.sh
+wget https://raw.githubusercontent.com/yourusername/advanced-url-downloader/main/download_manager_v2.sh
 ```
 
 2. **Make executable:**
 ```bash
-chmod +x download_manager.sh
+chmod +x download_manager_v2.sh
 ```
 
 3. **Test installation:**
 ```bash
 # Test with colors (should auto-detect terminal capabilities)
-./download_manager.sh --version
+./download_manager_v2.sh --version
 
 # Test without colors (clean output)
-./download_manager.sh --version --no-color
+./download_manager_v2.sh --version --no-color
 ```
 
 4. **Optional: Install globally:**
 ```bash
-sudo cp download_manager.sh /usr/local/bin/download_manager
+sudo cp download_manager_v2.sh /usr/local/bin/download_manager
 download_manager --help
 ```
 
@@ -145,34 +145,34 @@ echo "https://example.com/file1.zip" > urls.txt
 echo "https://example.com/file2.tar.gz" >> urls.txt
 
 # Download files (with automatic color detection)
-./download_manager.sh download urls.txt ./downloads
+./download_manager_v2.sh download urls.txt ./downloads
 
 # For automation/scripts (clean output)
-./download_manager.sh download urls.txt ./downloads --no-color --quiet
+./download_manager_v2.sh download urls.txt ./downloads --no-color --quiet
 ```
 
 ### SLURM Download
 ```bash
 # Submit to SLURM with 8 cores and 16GB RAM
-./download_manager.sh download urls.txt ./downloads --slurm --cores 8 --memory 16G
+./download_manager_v2.sh download urls.txt ./downloads --slurm --cores 8 --memory 16G
 ```
 
 ### Generate and Verify Checksums
 ```bash
 # Generate checksums
-./download_manager.sh verify ./downloads --generate
+./download_manager_v2.sh verify ./downloads --generate
 
 # Verify checksums
-./download_manager.sh verify ./downloads
+./download_manager_v2.sh verify ./downloads
 ```
 
 ### Check Help (with colors)
 ```bash
 # Colored help (auto-detected)
-./download_manager.sh --help
+./download_manager_v2.sh --help
 
 # Clean help for scripts/documentation
-./download_manager.sh --help --no-color
+./download_manager_v2.sh --help --no-color
 ```
 
 ## 🎯 Command Reference
@@ -193,10 +193,10 @@ The script automatically adapts to your environment, but you can override:
 
 | Mode | When to Use | Example |
 |------|-------------|---------|
-| **Auto-detect** (default) | Interactive terminal use | `./download_manager.sh --help` |
-| **No-color** | Scripts, automation, old terminals | `./download_manager.sh --help --no-color` |
-| **Quiet** | Background jobs, logging | `./download_manager.sh download urls.txt ./downloads --quiet` |
-| **Verbose** | Debugging, detailed monitoring | `./download_manager.sh download urls.txt ./downloads --verbose` |
+| **Auto-detect** (default) | Interactive terminal use | `./download_manager_v2.sh --help` |
+| **No-color** | Scripts, automation, old terminals | `./download_manager_v2.sh --help --no-color` |
+| **Quiet** | Background jobs, logging | `./download_manager_v2.sh download urls.txt ./downloads --quiet` |
+| **Verbose** | Debugging, detailed monitoring | `./download_manager_v2.sh download urls.txt ./downloads --verbose` |
 
 ### Global Options
 
@@ -212,7 +212,7 @@ The script automatically adapts to your environment, but you can override:
 
 ### Syntax
 ```bash
-./download_manager.sh download <url_file> <target_directory> [options]
+./download_manager_v2.sh download <url_file> <target_directory> [options]
 ```
 
 ### Local Download Options
@@ -248,45 +248,45 @@ The script automatically adapts to your environment, but you can override:
 #### Local Downloads
 ```bash
 # Basic download (with auto-detected colors)
-./download_manager.sh download urls.txt ./downloads
+./download_manager_v2.sh download urls.txt ./downloads
 
 # High-performance local download
-./download_manager.sh download urls.txt ./downloads --jobs 16 --timeout 7200
+./download_manager_v2.sh download urls.txt ./downloads --jobs 16 --timeout 7200
 
 # Custom User-Agent for restrictive sites
-./download_manager.sh download urls.txt ./downloads \
+./download_manager_v2.sh download urls.txt ./downloads \
     --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
 
 # Download without progress bars (for scripting)
-./download_manager.sh download urls.txt ./downloads --no-progress --quiet --no-color
+./download_manager_v2.sh download urls.txt ./downloads --no-progress --quiet --no-color
 
 # Automation-friendly download with clean output
-./download_manager.sh download urls.txt ./downloads --no-color --quiet > download.log 2>&1
+./download_manager_v2.sh download urls.txt ./downloads --no-color --quiet > download.log 2>&1
 ```
 
 #### SLURM Downloads
 ```bash
 # Basic SLURM download
-./download_manager.sh download urls.txt ./downloads --slurm --cores 8 --memory 16G
+./download_manager_v2.sh download urls.txt ./downloads --slurm --cores 8 --memory 16G
 
 # High-memory SLURM job
-./download_manager.sh download urls.txt ./downloads \
+./download_manager_v2.sh download urls.txt ./downloads \
     --slurm --cores 16 --memory 64G --time 8:00:00
 
 # SLURM job array (one job per URL)
-./download_manager.sh download urls.txt ./downloads \
+./download_manager_v2.sh download urls.txt ./downloads \
     --slurm --array --cores 2 --memory 4G
 
 # Interactive SLURM session
-./download_manager.sh download urls.txt ./downloads \
+./download_manager_v2.sh download urls.txt ./downloads \
     --slurm --interactive --cores 4
 
 # Custom partition and account
-./download_manager.sh download urls.txt ./downloads \
+./download_manager_v2.sh download urls.txt ./downloads \
     --slurm --partition gpu --account myproject --cores 8
 
 # SLURM with additional sbatch arguments
-./download_manager.sh download urls.txt ./downloads \
+./download_manager_v2.sh download urls.txt ./downloads \
     --slurm --cores 8 --sbatch-args "--mail-type=ALL --mail-user=user@domain.com"
 ```
 
@@ -294,7 +294,7 @@ The script automatically adapts to your environment, but you can override:
 
 ### Syntax
 ```bash
-./download_manager.sh verify <directory> [checksum_file] [options]
+./download_manager_v2.sh verify <directory> [checksum_file] [options]
 ```
 
 ### Options
@@ -314,35 +314,35 @@ The script automatically adapts to your environment, but you can override:
 
 ```bash
 # Generate checksums locally (with colors)
-./download_manager.sh verify ./downloads --generate
+./download_manager_v2.sh verify ./downloads --generate
 
 # Generate checksums with SLURM
-./download_manager.sh verify ./downloads --generate --slurm --cores 8
+./download_manager_v2.sh verify ./downloads --generate --slurm --cores 8
 
 # Generate checksums for specific files
-./download_manager.sh verify ./downloads --generate --file-pattern "*.tar.gz"
+./download_manager_v2.sh verify ./downloads --generate --file-pattern "*.tar.gz"
 
 # Generate checksums excluding logs
-./download_manager.sh verify ./downloads --generate --exclude-pattern "*.log"
+./download_manager_v2.sh verify ./downloads --generate --exclude-pattern "*.log"
 
 # Verify existing checksums (with colored output)
-./download_manager.sh verify ./downloads checksums.md5
+./download_manager_v2.sh verify ./downloads checksums.md5
 
 # Auto-detect and verify checksums
-./download_manager.sh verify ./downloads
+./download_manager_v2.sh verify ./downloads
 
 # Strict verification (fail fast)
-./download_manager.sh verify ./downloads --strict
+./download_manager_v2.sh verify ./downloads --strict
 
 # Automation-friendly verification
-./download_manager.sh verify ./downloads --no-color --quiet
+./download_manager_v2.sh verify ./downloads --no-color --quiet
 ```
 
 ## 🖥 SLURM Command
 
 ### Syntax
 ```bash
-./download_manager.sh slurm <subcommand> [options]
+./download_manager_v2.sh slurm <subcommand> [options]
 ```
 
 ### Subcommands
@@ -359,25 +359,25 @@ The script automatically adapts to your environment, but you can override:
 
 ```bash
 # Submit download job
-./download_manager.sh slurm submit urls.txt ./downloads --cores 8 --memory 16G
+./download_manager_v2.sh slurm submit urls.txt ./downloads --cores 8 --memory 16G
 
 # Check job status
-./download_manager.sh slurm status --job-name url-download
+./download_manager_v2.sh slurm status --job-name url-download
 
 # Check specific job
-./download_manager.sh slurm status --job-id 12345
+./download_manager_v2.sh slurm status --job-id 12345
 
 # Cancel all download jobs
-./download_manager.sh slurm cancel --job-name url-download
+./download_manager_v2.sh slurm cancel --job-name url-download
 
 # Cancel specific job
-./download_manager.sh slurm cancel --job-id 12345
+./download_manager_v2.sh slurm cancel --job-id 12345
 
 # View job logs
-./download_manager.sh slurm logs --job-id 12345
+./download_manager_v2.sh slurm logs --job-id 12345
 
 # Show cluster information
-./download_manager.sh slurm info
+./download_manager_v2.sh slurm info
 ```
 
 ## 📁 File Formats
@@ -422,15 +422,15 @@ target_directory/
 ### Large Dataset Downloads
 ```bash
 # For very large datasets with SLURM job arrays
-./download_manager.sh download large_dataset_urls.txt ./large_downloads \
+./download_manager_v2.sh download large_dataset_urls.txt ./large_downloads \
     --slurm --array --cores 4 --memory 8G --time 12:00:00 \
     --partition bigmem --account data_project
 
 # Monitor progress
-./download_manager.sh slurm status --job-name url-download
+./download_manager_v2.sh slurm status --job-name url-download
 
 # Generate checksums using SLURM after download
-./download_manager.sh verify ./large_downloads --generate --slurm --cores 16
+./download_manager_v2.sh verify ./large_downloads --generate --slurm --cores 16
 ```
 
 ### Batch Processing Workflow
@@ -445,19 +445,19 @@ MEMORY="16G"
 
 # Step 1: Download files (automation-friendly)
 echo "Starting downloads..."
-./download_manager.sh download "$URLS_FILE" "$DOWNLOAD_DIR" \
+./download_manager_v2.sh download "$URLS_FILE" "$DOWNLOAD_DIR" \
     --slurm --cores $CORES --memory $MEMORY --no-color
 
 # Step 2: Wait for completion (or check manually)
-echo "Monitor with: ./download_manager.sh slurm status --job-name url-download"
+echo "Monitor with: ./download_manager_v2.sh slurm status --job-name url-download"
 
 # Step 3: Generate checksums
 echo "Generating checksums..."
-./download_manager.sh verify "$DOWNLOAD_DIR" --generate --slurm --cores $CORES --no-color
+./download_manager_v2.sh verify "$DOWNLOAD_DIR" --generate --slurm --cores $CORES --no-color
 
 # Step 4: Verify checksums
 echo "Verifying checksums..."
-./download_manager.sh verify "$DOWNLOAD_DIR" --strict --no-color
+./download_manager_v2.sh verify "$DOWNLOAD_DIR" --strict --no-color
 ```
 
 ### Automation Best Practices
@@ -471,12 +471,12 @@ echo "Verifying checksums..."
 set -e  # Exit on any error
 
 # Download with clean output
-if ./download_manager.sh download urls.txt ./downloads --no-color --quiet; then
+if ./download_manager_v2.sh download urls.txt ./downloads --no-color --quiet; then
     echo "Download completed successfully"
     
     # Generate and verify checksums
-    ./download_manager.sh verify ./downloads --generate --no-color --quiet
-    ./download_manager.sh verify ./downloads --no-color --quiet
+    ./download_manager_v2.sh verify ./downloads --generate --no-color --quiet
+    ./download_manager_v2.sh verify ./downloads --no-color --quiet
     
     echo "All files verified successfully"
 else
@@ -495,7 +495,7 @@ grep "URL:" downloads/.download_logs/errors_*.log | \
     sed 's/.*URL: //' > retry_urls.txt
 
 # Retry failed downloads
-./download_manager.sh download retry_urls.txt ./downloads --slurm --cores 4
+./download_manager_v2.sh download retry_urls.txt ./downloads --slurm --cores 4
 ```
 
 ## 🐛 Troubleshooting
@@ -511,14 +511,14 @@ echo $TERM
 tput colors
 
 # 2. Force no colors
-./download_manager.sh --help --no-color
+./download_manager_v2.sh --help --no-color
 
 # 3. Set UTF-8 encoding
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # 4. Test with different terminal
-TERM=xterm-256color ./download_manager.sh --help
+TERM=xterm-256color ./download_manager_v2.sh --help
 
 # 5. Update terminal or use different one
 # On macOS: Try iTerm2 or upgrade Terminal.app
@@ -528,7 +528,7 @@ TERM=xterm-256color ./download_manager.sh --help
 #### Permission Denied
 ```bash
 # Make script executable
-chmod +x download_manager.sh
+chmod +x download_manager_v2.sh
 
 # Check directory permissions
 ls -la target_directory/
@@ -537,10 +537,10 @@ ls -la target_directory/
 #### SLURM Job Failures
 ```bash
 # Check SLURM logs
-./download_manager.sh slurm logs --job-id <job_id>
+./download_manager_v2.sh slurm logs --job-id <job_id>
 
 # Check cluster status
-./download_manager.sh slurm info
+./download_manager_v2.sh slurm info
 
 # Verify partition access
 sinfo -p <partition_name>
@@ -564,7 +564,7 @@ ping example.com
 wget "https://example.com/file.zip" -O downloads/file.zip
 
 # Regenerate checksums
-./download_manager.sh verify ./downloads --generate --output new_checksums.md5
+./download_manager_v2.sh verify ./downloads --generate --output new_checksums.md5
 
 # Compare checksums
 diff checksums.md5 new_checksums.md5
@@ -573,13 +573,13 @@ diff checksums.md5 new_checksums.md5
 ### Debug Mode
 ```bash
 # Enable verbose output
-./download_manager.sh download urls.txt ./downloads --verbose
+./download_manager_v2.sh download urls.txt ./downloads --verbose
 
 # SLURM debug information
-./download_manager.sh download urls.txt ./downloads --slurm --verbose
+./download_manager_v2.sh download urls.txt ./downloads --slurm --verbose
 
 # Clean output for automation
-./download_manager.sh download urls.txt ./downloads --quiet --no-color
+./download_manager_v2.sh download urls.txt ./downloads --quiet --no-color
 ```
 
 ## 🌍 Environment Considerations
@@ -593,13 +593,13 @@ ssh -t user@server
 export TERM=xterm-256color
 
 # For automated scripts on remote servers
-./download_manager.sh download urls.txt ./downloads --no-color --quiet
+./download_manager_v2.sh download urls.txt ./downloads --no-color --quiet
 ```
 
 ### **Screen/Tmux Sessions**
 ```bash
 # In screen/tmux, colors might not work properly
-./download_manager.sh --help --no-color
+./download_manager_v2.sh --help --no-color
 
 # Or set proper terminal in screen/tmux config
 # .screenrc: term screen-256color
@@ -609,12 +609,12 @@ export TERM=xterm-256color
 ### **CI/CD Pipelines**
 ```bash
 # Always use --no-color in automated environments
-./download_manager.sh download urls.txt ./downloads --no-color --quiet
+./download_manager_v2.sh download urls.txt ./downloads --no-color --quiet
 
 # Example GitHub Actions
 run: |
-  chmod +x download_manager.sh
-  ./download_manager.sh download urls.txt ./downloads --no-color --jobs 4
+  chmod +x download_manager_v2.sh
+  ./download_manager_v2.sh download urls.txt ./downloads --no-color --jobs 4
 ```
 
 ### **Docker Containers**
@@ -624,7 +624,7 @@ ENV LANG=C.UTF-8
 ENV LC_ALL=C.UTF-8
 
 # Run with no-color for consistent output
-RUN ./download_manager.sh download urls.txt ./downloads --no-color
+RUN ./download_manager_v2.sh download urls.txt ./downloads --no-color
 ```
 
 ## 📈 Performance Tuning
@@ -645,27 +645,27 @@ RUN ./download_manager.sh download urls.txt ./downloads --no-color
 #### Small Files (< 100MB each)
 ```bash
 # Local
-./download_manager.sh download urls.txt ./downloads --jobs 16
+./download_manager_v2.sh download urls.txt ./downloads --jobs 16
 
 # SLURM
-./download_manager.sh download urls.txt ./downloads \
+./download_manager_v2.sh download urls.txt ./downloads \
     --slurm --array --cores 2 --memory 4G
 ```
 
 #### Large Files (> 1GB each)
 ```bash
 # Local
-./download_manager.sh download urls.txt ./downloads --jobs 4 --timeout 7200
+./download_manager_v2.sh download urls.txt ./downloads --jobs 4 --timeout 7200
 
 # SLURM
-./download_manager.sh download urls.txt ./downloads \
+./download_manager_v2.sh download urls.txt ./downloads \
     --slurm --cores 8 --memory 16G --time 8:00:00
 ```
 
 #### Mixed File Sizes
 ```bash
 # SLURM with balanced resources
-./download_manager.sh download urls.txt ./downloads \
+./download_manager_v2.sh download urls.txt ./downloads \
     --slurm --cores 8 --memory 16G --time 6:00:00
 ```
 
@@ -683,9 +683,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### **Common Issues:**
 - **Color/display problems**: Use `--no-color` flag or check [Terminal Compatibility](#-terminal-compatibility)
-- **SLURM errors**: Check cluster status with `./download_manager.sh slurm info`
+- **SLURM errors**: Check cluster status with `./download_manager_v2.sh slurm info`
 - **Download failures**: Review error logs in `target_directory/.download_logs/`
-- **Permission issues**: Ensure script is executable with `chmod +x download_manager.sh`
+- **Permission issues**: Ensure script is executable with `chmod +x download_manager_v2.sh`
 
 ### **For Automation Issues:**
 Always include the `--no-color` flag in scripts and provide:
