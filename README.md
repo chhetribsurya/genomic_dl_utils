@@ -1,7 +1,7 @@
 # Advanced url download manager
 
 **Author:** Surya B. Chhetri  
-**Version:** 3.0
+**Version:** 2.0
 
 A powerful, feature-rich command-line tool for downloading files from URLs with support for parallel processing, SLURM integration, and MD5 checksum verification.
 
@@ -697,4 +697,4 @@ Always include the `--no-color` flag in scripts and provide:
 
 **Author:** Surya B. Chhetri  
 **Repository:** https://github.com/chhetribsurya/genomic_dl_utils
-**Version:** 3.0
+**Version:** 2.0
