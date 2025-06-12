@@ -694,8 +694,7 @@ Always include the `--no-color` flag in scripts and provide:
 - Environment details (CI/CD, Docker, etc.)
 
 ---
-
-**Author:** Surya B. Chhetri  
-**Repository:** https://github.com/chhetribsurya/genomic_dl_utils 
-**Version:** 2.0
-**Contact** chhetribsurya@gmail.com
+👤 **Author:** Surya B. Chhetri  
+📂 **Repository:** https://github.com/chhetribsurya/genomic_dl_utils  
+🏷️ **Version:** 2.0  
+📧 **Contact:** chhetribsurya@gmail.com
