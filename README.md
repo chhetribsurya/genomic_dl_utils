@@ -18,14 +18,14 @@ A powerful, feature-rich command-line tool for downloading files from URLs with 
 - ✅ **Flexible Configuration** - Extensive command-line options
 - ✅ **Smart Color Detection** - Automatic terminal capability detection
 - ✅ **Terminal Compatibility** - Works across different terminal types
-- ✅ **Unicode Support** - Beautiful symbols with ASCII fallback
+- ✅ **Unicode Support** - Symbols with ASCII fallback
 
 ## 🎨 Terminal Compatibility
 
 The script automatically detects your terminal's capabilities and adapts accordingly:
 
 ### **Color Support**
-- **Full Color Terminals** (xterm-256color, modern terminals): Beautiful colored output with Unicode symbols
+- **Full Color Terminals** (xterm-256color, modern terminals): Colored output with Unicode symbols
 - **Basic Terminals** (xterm, older terminals): Colored output with ASCII symbols  
 - **No Color Support** (dumb terminals, pipes): Clean ASCII-only output
 - **Manual Override**: Use `--no-color` to force ASCII-only output
@@ -168,7 +168,7 @@ echo "https://example.com/file2.tar.gz" >> urls.txt
 
 ### Check Help (with colors)
 ```bash
-# Beautiful colored help (auto-detected)
+# Colored help (auto-detected)
 ./download_manager.sh --help
 
 # Clean help for scripts/documentation
