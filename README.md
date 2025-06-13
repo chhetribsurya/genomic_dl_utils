@@ -1,11 +1,10 @@
 # Advanced url download manager
 
-**Author:** Surya B. Chhetri  
 **Version:** 2.0
 
 A powerful, feature-rich command-line tool for downloading files from URLs with support for parallel processing, SLURM integration, and MD5 checksum verification.
 
-## 🚀 Features
+## Features
 
 - ✅ **Parallel Downloads** - Configurable concurrent download jobs
 - ✅ **SLURM Integration** - Full HPC cluster support with job arrays
@@ -20,7 +19,7 @@ A powerful, feature-rich command-line tool for downloading files from URLs with 
 - ✅ **Terminal Compatibility** - Works across different terminal types
 - ✅ **Unicode Support** - Symbols with ASCII fallback
 
-## 🎨 Terminal Compatibility
+## Terminal Compatibility
 
 The script automatically detects your terminal's capabilities and adapts accordingly:
 
@@ -89,7 +88,7 @@ brew install wget coreutils
 # Usually pre-installed on HPC clusters
 ```
 
-## 🛠 Installation
+## Installation
 
 1. **Download the script:**
 ```bash
