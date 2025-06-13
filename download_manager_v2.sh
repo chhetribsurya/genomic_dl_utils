@@ -2,11 +2,11 @@
 
 # Advanced URL Downloader with MD5 Verification and SLURM Support
 # Author: Surya B. Chhetri
-# Version: 3.0
+# Version: 2.0
 
 # Global variables
 SCRIPT_NAME=$(basename "$0")
-VERSION="3.0"
+VERSION="2.0"
 AUTHOR="Surya B. Chhetri"
 
 # Color support detection
